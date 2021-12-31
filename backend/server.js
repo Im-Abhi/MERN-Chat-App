@@ -14,10 +14,10 @@ app.get("/api/chat", (req, res) => {
 
 app.get("/api/chat/:id", (req, res) => {
     const chatId = req.params.id;
-    const singleChat = chats.find( chat => chat.id === chatId );
+    const singleChat = chats.find(chat => chat._id === chatId);
     res.send(singleChat);
 });
 
-app.listen(() => {
+app.listen(4000, () => {
     console.log(`Server started on port ${port}`);
 });
