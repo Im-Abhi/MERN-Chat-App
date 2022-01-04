@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 const SignUp = () => {
 
     const [ show, setShow ] = useState(false);
-    const [ name, setName] = useState();
-    const [ email, setEmail] = useState();
-    const [ confirmpassword, setConfirmpassword] = useState();
-    const [ password, setPassword] = useState();
-    const [ pic, setPic] = useState();
+    const [ name, setName ] = useState();
+    const [ email, setEmail ] = useState();
+    const [ confirmpassword, setConfirmpassword ] = useState();
+    const [ password, setPassword ] = useState();
+    const [ pic, setPic ] = useState();
 
     const handleClick = () => setShow(!show)
 
@@ -44,6 +44,7 @@ const SignUp = () => {
                         pr='4.5rem'
                         type={show ? 'text' : 'password'}
                         placeholder='Enter password'
+                        onChange={e=>setPassword(e.target.value)}
                     />
                     <InputRightElement width='4.5rem'>
                         <Button h='1.75rem' size='sm' onClick={handleClick}>
