@@ -117,4 +117,22 @@ const renameGroup = expressAsyncHandler( async (req, res) => {
     }
 });
 
-module.exports = { accessChat, fetchChats, createGroupChat, renameGroup };
+const addToGroup = expressAsyncHandler( async (req, res) => {
+    const { chatId, userId } = req.body;
+    
+    const added = Chat.findByIdAndUpdate( chatId, {
+        $push: { users: userId }
+    },
+    {
+        new: true
+    });
+
+    if(!added) {
+        res.status(404);
+        throw new Error("User not found!");
+    } else {
+        res.json(added);
+    }
+});
+
+module.exports = { accessChat, fetchChats, createGroupChat, renameGroup, addToGroup };
