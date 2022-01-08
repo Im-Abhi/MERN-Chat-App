@@ -120,12 +120,13 @@ const renameGroup = expressAsyncHandler( async (req, res) => {
 const addToGroup = expressAsyncHandler( async (req, res) => {
     const { chatId, userId } = req.body;
     
-    const added = Chat.findByIdAndUpdate( chatId, {
+    const added = await Chat.findByIdAndUpdate( chatId, {
         $push: { users: userId }
     },
     {
         new: true
-    });
+    }).populate("users","-password")
+        .populate("groupAdmin","-passowrd");
 
     if(!added) {
         res.status(404);
@@ -135,4 +136,30 @@ const addToGroup = expressAsyncHandler( async (req, res) => {
     }
 });
 
-module.exports = { accessChat, fetchChats, createGroupChat, renameGroup, addToGroup };
+const removeFromGroup = expressAsyncHandler( async (req, res) => {
+    const { chatId, userId } = req.body;
+    
+    const removed = await Chat.findByIdAndUpdate( chatId, {
+        $pull: { users: userId }
+    },
+    {
+        new: true
+    }).populate("users","-password")
+        .populate("groupAdmin","-passowrd");
+
+    if(!removed) {
+        res.status(404);
+        throw new Error("Chat or user not found!");
+    } else {
+        res.json(removed);
+    }
+});
+
+module.exports = { 
+    accessChat,
+    fetchChats, 
+    createGroupChat, 
+    renameGroup, 
+    addToGroup,
+    removeFromGroup
+};
