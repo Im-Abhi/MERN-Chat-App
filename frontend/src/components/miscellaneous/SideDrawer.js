@@ -1,5 +1,6 @@
 import { Box, Button, Tooltip, Text, Menu, MenuButton, Avatar, MenuList, MenuItem, MenuDivider } from '@chakra-ui/react';
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { ChatState } from '../../context/ChatProvider';
 import ProfileModal from './ProfileModal';
 
@@ -9,6 +10,11 @@ const SideDrawer = () => {
     const [ loading, setLoading ] = useState(false);
     const [ loadingChat, setLoadingChat ] = useState();  
     const { user } = ChatState();
+    const history = useHistory();
+    const logoutHandler = () => {
+        localStorage.removeItem("userInfo");
+        history.push("/");
+    }
     return (
         <Box
             d="flex"
@@ -54,7 +60,7 @@ const SideDrawer = () => {
                             <MenuItem>My Profile</MenuItem>
                         </ProfileModal>
                         <MenuDivider />
-                        <MenuItem>LogOut</MenuItem>
+                        <MenuItem onClick={logoutHandler}>LogOut</MenuItem>
                     </MenuList>
                 </Menu>
             </div>
