@@ -8,7 +8,7 @@ const userSchema = Schema({
     password: { type: String, required: true},
     pic: {
         type: String, 
-        default: "https://cdn-icons.flaticon.com/png/512/3177/premium/3177440.png?token=exp=1641126171~hmac=4b0cc32c57f4481d95bfd46bdc0b8e03" 
+        default: "https://cdn-icons-png.flaticon.com/512/149/149995.png" 
     }
 },
 {

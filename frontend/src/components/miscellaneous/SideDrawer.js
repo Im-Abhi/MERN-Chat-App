@@ -1,6 +1,7 @@
 import { Box, Button, Tooltip, Text, Menu, MenuButton, Avatar, MenuList, MenuItem, MenuDivider } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { ChatState } from '../../context/ChatProvider';
+import ProfileModal from './ProfileModal';
 
 const SideDrawer = () => {
     const [ search, setSearch ] = useState("");
@@ -24,7 +25,7 @@ const SideDrawer = () => {
                 placement='bottom-end'
             >
                 <Button variant="ghost">
-                    <i class="fas fa-search"></i>
+                    <i className="fas fa-search"></i>
                     <Text d={{  base: "none", md: "flex"}} px="4">
                         Search User
                     </Text>
@@ -36,11 +37,11 @@ const SideDrawer = () => {
             <div>
                 <Menu>
                     <MenuButton p={1}>
-                        <i class="fas fa-bell" style={{"padding-right":"10px"}}></i>
+                        <i className="fas fa-bell" style={{paddingRight:"10px"}}></i>
                     </MenuButton>
                 </Menu>
                 <Menu>
-                    <MenuButton as={Button} rightIcon={<i class="fas fa-chevron-down"></i>}>
+                    <MenuButton as={Button} rightIcon={<i className="fas fa-chevron-down"></i>}>
                         <Avatar 
                             size='sm' 
                             cursor="pointer" 
@@ -49,7 +50,9 @@ const SideDrawer = () => {
                         />
                     </MenuButton>
                     <MenuList>
-                        <MenuItem>My Profile</MenuItem>
+                        <ProfileModal user={user}>
+                            <MenuItem>My Profile</MenuItem>
+                        </ProfileModal>
                         <MenuDivider />
                         <MenuItem>LogOut</MenuItem>
                     </MenuList>
