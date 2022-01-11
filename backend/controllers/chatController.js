@@ -38,7 +38,7 @@ const accessChat = expressAsyncHandler( async (req, res) => {
 
             const FullChat = await Chat.findOne({_id: createdChat._id})
                                     .populate("users", "-password");
-            res.status(200).send(FullChat);
+            res.status(200).json(FullChat);
         } catch (error) {
             res.status(400);
             throw new Error(error.message);     
@@ -90,7 +90,8 @@ const createGroupChat = expressAsyncHandler( async (req, res) => {
         
         res.status(200).json(fullGroupChat);
     } catch (error) {
-        
+        res.status(400);
+        throw new Error(error.message);
     }
     
 });
@@ -101,7 +102,7 @@ const renameGroup = expressAsyncHandler( async (req, res) => {
     const updatedChat = await Chat.findByIdAndUpdate(
         chatId,
         {
-            chatName
+            chatName: chatName
         },
         {
             new: true
